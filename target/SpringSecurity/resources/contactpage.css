@@ -1,0 +1,22 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	padding-top: 70px;
+	min-height: 2000px;
+}
+
+.navbar-login {
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session {
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size {
+    font-size: 87px;
+}
