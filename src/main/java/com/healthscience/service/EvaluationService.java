@@ -9,5 +9,7 @@ public interface EvaluationService {
 	public void addResidentEvaluationData(Evaluationform evaluationrf);
 	
 	public List<Evaluationform> getAllResidentEvaluation();
+	
+	public void deleteEvaluationInformation(Integer evaluationId);
 
 }

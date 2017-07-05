@@ -1,8 +1,13 @@
 package com.healthscience.web.controller;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -93,12 +98,27 @@ public class MainController {
        
         
        evaluationService.addResidentEvaluationData(evaluationrf);
-         
-       return new ModelAndView("hello");
+       ModelAndView model = new ModelAndView();
+		List<Evaluationform> listOfRe = evaluationService.getAllResidentEvaluation();
+		model.addObject("listOfRe", listOfRe);
+		model.setViewName("resultsofresidentevaluation");
+		return model;
 	}
 	
 	@RequestMapping(value = "/resultsofresidentevaluation/**")
 	public ModelAndView listEmployee(ModelAndView model) throws IOException {
+		List<Evaluationform> listOfRe = evaluationService.getAllResidentEvaluation();
+		model.addObject("listOfRe", listOfRe);
+		model.setViewName("resultsofresidentevaluation");
+		return model;
+	}
+	
+	@RequestMapping(value = "/deleteEvaluationInformation", method = RequestMethod.GET)
+	public ModelAndView deleteEvaluationInformation(HttpServletRequest request) {
+		int evaluationId = Integer.parseInt(request.getParameter("id"));
+		System.out.println(evaluationId);
+		evaluationService.deleteEvaluationInformation(evaluationId);
+		ModelAndView model = new ModelAndView();
 		List<Evaluationform> listOfRe = evaluationService.getAllResidentEvaluation();
 		model.addObject("listOfRe", listOfRe);
 		model.setViewName("resultsofresidentevaluation");

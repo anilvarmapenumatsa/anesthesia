@@ -114,7 +114,7 @@
 				<table class="table table-responsive table-hover">
 					<thead>
 						<tr class="filters">
-							<!-- <th>&nbsp;</th> -->
+							<th>&nbsp;</th>
 							<th><input type="text" class="form-control"
 								placeholder="Resident Name" disabled></th>
 							<!-- <th><input type="text" class="form-control"
@@ -154,7 +154,7 @@
 					<c:forEach var="evaluationrf" items="${listOfRe}">
 						<tbody>
 							<tr>
-								<%-- <td>${evaluationrf.id}</td> --%>
+								<td>${evaluationrf.id}</td>
 								<td>${evaluationrf.residentName}</td>
 								<%-- <td>${evaluationrf.residentDate}</td> --%>
 								<td>${evaluationrf.residentRank}</td>
@@ -172,6 +172,7 @@
 								<%-- <td>${evaluationrf.goalsComment}</td> --%>
 								<td>${evaluationrf.evaluatorName}</td>
 								<td>${evaluationrf.evaluatorDate}</td>
+								<td><a href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
 							</tr>
 						</tbody>
 					</c:forEach>

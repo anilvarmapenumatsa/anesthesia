@@ -25,5 +25,15 @@ public class EvaluationDAOImpl implements EvaluationDAO{
 		return sessionFactory.getCurrentSession().createQuery("from Evaluationform")
 				.list();
 	}
+	
+	@Override
+	public void deleteEvaluationInformation(Integer evaluationId) {
+		Evaluationform evaluationrf = (Evaluationform) sessionFactory.getCurrentSession().load(
+				Evaluationform.class, evaluationId);
+		if (null != evaluationrf) {
+			this.sessionFactory.getCurrentSession().delete(evaluationrf);
+		}
+
+	}
 
 }

@@ -27,5 +27,11 @@ public class EvaluationServiceImpl implements EvaluationService{
 	public List<Evaluationform> getAllResidentEvaluation() {
 		return evaluationDAO.getAllResidentEvaluation();
 	}
+	
+	@Override
+	@Transactional
+	public void deleteEvaluationInformation(Integer evaluationId) {
+		evaluationDAO.deleteEvaluationInformation(evaluationId);
+	}
 
 }
