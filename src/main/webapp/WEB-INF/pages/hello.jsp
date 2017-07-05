@@ -2,8 +2,10 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 <script src="<c:url value="/bootstrapjs/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/bootstrapjs/bootstrap.js" />"></script>
 
@@ -37,10 +39,10 @@
 					<li><a href="/SpringSecurity/contactpage">Contact</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Dropdown <span class="caret"></span></a>
+						aria-expanded="false">Evaluation Dropdown <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
+							<li><a href="/SpringSecurity/residentsimulationevaluationform">Evaluation</a></li>
+							<li><a href="/SpringSecurity/resultsofresidentevaluation">Evaluation Results</a></li>
 							<li><a href="#">Something else here</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Nav header</li>
@@ -68,7 +70,7 @@
 												<p class="text-left">
 													<strong>${pageContext.request.userPrincipal.name}</strong>
 												</p>
-												<p class="text-left small">@gmail.com</p>
+												<p class="text-left small">@rockets.utoledo.edu</p>
 												<p>
 													<a href="#/changepassword"
 														class="btn btn-primary btn-block btn-sm">Change
@@ -90,6 +92,7 @@
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
+	
 
 
 	<sec:authorize access="hasRole('ROLE_USER')">

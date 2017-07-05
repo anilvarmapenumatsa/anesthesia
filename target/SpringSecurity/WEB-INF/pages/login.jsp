@@ -22,7 +22,7 @@
     <h3><spring:message code="label.signin"/></h3>
       <input type="text" name='username'/>
       <input type="password" name="password"/>
-      <button type="submit"><spring:message code="label.login"/></button>
+      <button type="submit" ><spring:message code="label.login"/></button>
 	  <input type="hidden" name="${_csrf.parameterName}"
 				value="${_csrf.token}" />
     </form>

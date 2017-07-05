@@ -2,12 +2,15 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 <script src="<c:url value="/bootstrapjs/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/bootstrapjs/bootstrap.js" />"></script>
 
-<link href="<c:url value="/bootstrapcss/bootstrap.css" />" rel="stylesheet">
+<link href="<c:url value="/bootstrapcss/bootstrap.css" />"
+	rel="stylesheet">
 <link href="<c:url value="/bootstrapcss/bootstrap-theme.css" />"
 	rel="stylesheet">
 
@@ -36,10 +39,10 @@
 					<li><a href="/SpringSecurity/contactpage">Contact</a></li>
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Dropdown <span class="caret"></span></a>
+						aria-expanded="false">Evaluation Dropdown <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Action</a></li>
-							<li><a href="#">Another action</a></li>
+							<li><a href="/SpringSecurity/residentsimulationevaluationform">Evaluation</a></li>
+							<li><a href="/SpringSecurity/resultsofresidentevaluation">Evaluation Results</a></li>
 							<li><a href="#">Something else here</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Nav header</li>
@@ -47,49 +50,50 @@
 							<li><a href="#">One more separated link</a></li>
 						</ul></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-					<a href="javascript:void(0);"
-						class="dropdown-toggle" data-toggle="dropdown"> <span
-							class="glyphicon glyphicon-user"></span> <strong>${pageContext.request.userPrincipal.name}</strong>
-							<span class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li>
-								<div class="navbar-login">
-									<div class="row">
-										<div class="col-lg-4">
-											<p class="text-center">
-												<span class="glyphicon glyphicon-user icon-size"></span>
-											</p>
-										</div>
-										<div class="col-lg-8">
-											<p class="text-left">
-												<strong>${pageContext.request.userPrincipal.name}</strong>
-											</p>
-											<p class="text-left small">@gmail.com</p>
-											<p>
-												<a href="#/changepassword"
-													class="btn btn-primary btn-block btn-sm">Change
-													Password</a>
-											</p>
-											<p>
-												<a href="javascript:formSubmit()"
-													class="btn btn-danger btn-block btn-sm">Logout</a>
-											</p>
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a href="javascript:void(0);"
+							class="dropdown-toggle" data-toggle="dropdown"> <span
+								class="glyphicon glyphicon-user"></span> <strong>${pageContext.request.userPrincipal.name}</strong>
+								<span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu">
+								<li>
+									<div class="navbar-login">
+										<div class="row">
+											<div class="col-lg-4">
+												<p class="text-center">
+													<span class="glyphicon glyphicon-user icon-size"></span>
+												</p>
+											</div>
+											<div class="col-lg-8">
+												<p class="text-left">
+													<strong>${pageContext.request.userPrincipal.name}</strong>
+												</p>
+												<p class="text-left small">@rockets.utoledo.edu</p>
+												<p>
+													<a href="#/changepassword"
+														class="btn btn-primary btn-block btn-sm">Change
+														Password</a>
+												</p>
+												<p>
+													<a href="javascript:formSubmit()"
+														class="btn btn-danger btn-block btn-sm">Logout</a>
+												</p>
+											</div>
 										</div>
 									</div>
-								</div>
-							</li>
-						</ul>
-						
-						
-						</li>
-				</ul>
+								</li>
+							</ul></li>
+					</ul>
+				</c:if>
+
 			</div>
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
+	
+
 
 	<sec:authorize access="hasRole('ROLE_USER')">
 		<!-- For login user -->
