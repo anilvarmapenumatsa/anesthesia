@@ -163,7 +163,7 @@
 								<td>${evaluationrf.technicalSkills}</td>
 								<!-- <td>${evaluationrf.tsComment}</td> -->
 								<td>${evaluationrf.teamWork}</td>
-								 <!--<td>${evaluationrf.twComment}</td> -->
+								<!--<td>${evaluationrf.twComment}</td> -->
 								<td>${evaluationrf.leadership}</td>
 								<!-- <td>${evaluationrf.lsComment}</td> -->
 								<td>${evaluationrf.professionalism}</td>
@@ -172,7 +172,8 @@
 								<%-- <td>${evaluationrf.goalsComment}</td> --%>
 								<td>${evaluationrf.evaluatorName}</td>
 								<td>${evaluationrf.evaluatorDate}</td>
-								<td><a href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
+								<td><a
+									href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -180,5 +181,18 @@
 			</div>
 		</div>
 	</div>
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+	</sec:authorize>
 </body>
 </html>
