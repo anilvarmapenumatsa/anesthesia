@@ -19,91 +19,46 @@
 	rel="stylesheet">
 <link href="<c:url value="/bootstrapcss/bootstrap-theme.css" />"
 	rel="stylesheet">
+<link href="<c:url value="/bootstrapcss/applenavbar.min.css" />"
+	rel="stylesheet">
 <link href="<c:url value="/resources/welcomepage.css" />"
 	rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top navibar-inner">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">UT Anesthesia Tracking</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse"
-				aria-expanded="false" style="height: 1px;">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="/SpringSecurity/welcome">Home</a></li>
-					<li><a href="/SpringSecurity/contactpage">Contact</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Evaluation Dropdown <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="/SpringSecurity/residentsimulationevaluationform">Evaluation</a></li>
-							<li><a href="/SpringSecurity/resultsofresidentevaluation">Evaluation
-									Results</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="dropdown-header">Nav header</li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul></li>
-				</ul>
-				<c:if test="${pageContext.request.userPrincipal.name != null}">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a href="javascript:void(0);"
-							class="dropdown-toggle" data-toggle="dropdown"> <span
-								class="glyphicon glyphicon-user"></span> <strong>${pageContext.request.userPrincipal.name}</strong>
-								<span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu">
-								<li>
-									<div class="navbar-login">
-										<div class="row">
-											<div class="col-lg-4">
-												<p class="text-center">
-													<span class="glyphicon glyphicon-user icon-size"></span>
-												</p>
-											</div>
-											<div class="col-lg-8">
-												<p class="text-left">
-													<strong>${pageContext.request.userPrincipal.name}</strong>
-												</p>
-												<p class="text-left small">@rockets.utoledo.edu</p>
-												<p>
-													<a href="#/changepassword"
-														class="btn btn-primary btn-block btn-sm">Change
-														Password</a>
-												</p>
-												<p>
-													<a href="javascript:formSubmit()"
-														class="btn btn-danger btn-block btn-sm">Logout</a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul></li>
-					</ul>
-				</c:if>
+	<%@include file="header.jsp"%>
 
+	<nav id="ac-localnav" class="container js no-touch css-sticky"
+		lang="en-US" role="navigation">
+		<div class="ac-ln-wrapper">
+			<div class="ac-ln-background"></div>
+			<div class="ac-ln-content">
+				<h2 class="ac-ln-title">Evaluation</h2>
+				<div class="ac-ln-menu">
+					<div class="ac-ln-menu-tray">
+						<ul class="ac-ln-menu-items">
+							<li class="ac-ln-menu-item"><span
+								class="ac-ln-menu-link current" role="link" aria-disabled="true">Evaluation
+									Form</span></li>
+							<li class="ac-ln-menu-item"><a
+								href="/SpringSecurity/resultsofresidentevaluation"
+								class="ac-ln-menu-link">Summary</a></li>
+							<!-- <li class="ac-ln-menu-item"><a
+								href="#/viewfullproductionsummary" class="ac-ln-menu-link">Reports</a>
+							</li> -->
+						</ul>
+					</div>
+				</div>
 			</div>
-			<!--/.nav-collapse -->
 		</div>
 	</nav>
+
 	<div class="container">
 		<div class="row">
 			<section>
 				<div class="wizard">
 					<div class="wizard-inner">
 						<div class="connecting-line"></div>
-						<ul class="nav nav-tabs" role="tablist">
+						<ul class="nav nav-tabs" role="tablist" style="padding-top: 25px;">
 
 							<li role="presentation" class="active"><a href="#step1"
 								data-toggle="tab" aria-controls="step1" role="tab"
@@ -111,14 +66,14 @@
 										<i class="glyphicon glyphicon-folder-open"></i>
 								</span>
 							</a></li>
-							
+
 							<li role="presentation" class="disabled"><a href="#complete"
 								data-toggle="tab" aria-controls="complete" role="tab"
 								title="Complete"> <span class="round-tab"> <i
 										class="glyphicon glyphicon-ok"></i>
 								</span>
 							</a></li>
-							
+
 						</ul>
 					</div>
 
@@ -169,8 +124,14 @@
 								</div>
 								<br />
 								<div class="form-group ">
-									<label class="control-label "> Medical Knowledge </label>
-									<form:radiobuttons class="form-check-input" items="${grademk}" path="medicalKnowledge"></form:radiobuttons>
+									<label class="control-label " style="padding-right: 10px;">
+										Medical Knowledge </label>
+									<%-- <form:radiobuttons class="form-check-input" items="${grademk}"
+										path="medicalKnowledge"></form:radiobuttons> --%>
+									<form:radiobutton path="medicalKnowledge" value="Poor"
+										label="Poor" class="form-check-input"/>
+									<form:radiobutton path="medicalKnowledge" value="F"
+										label="Female" class="form-check-input"/>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="mkComment"

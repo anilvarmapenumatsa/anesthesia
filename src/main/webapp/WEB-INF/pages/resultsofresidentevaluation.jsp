@@ -8,179 +8,221 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 <script src="<c:url value="/bootstrapjs/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/bootstrapjs/bootstrap.js" />"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-<script src="<c:url value="/resources/residentEvaluationForm.js" />"></script>
-
-<script src="<c:url value="/resources/results.js" />"></script>
+<script src="<c:url value="/bootstrapjs/jquery-1.11.3.min.js" />"></script>
+<script src="<c:url value="/bootstrapjs/jquery.dataTables.min.js" />"></script>
 
 <link href="<c:url value="/bootstrapcss/bootstrap.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/bootstrapcss/bootstrap-theme.css" />"
 	rel="stylesheet">
+<link href="<c:url value="/bootstrapcss/applenavbar.min.css" />"
+	rel="stylesheet">
+<link href="<c:url value="/bootstrapcss/jquery.dataTables.min.css" />"
+	rel="stylesheet">
+<link
+	href="<c:url value="/bootstrapcss/responsive.dataTables.min.css" />"
+	rel="stylesheet">
+
+<script
+	src="<c:url value="/bootstrapjs/dataTables.responsive.min.js" />"></script>
+
 <link href="<c:url value="/resources/welcomepage.css" />"
 	rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top navibar-inner">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">UT Anesthesia Tracking</a>
-			</div>
-			<div id="navbar" class="navbar-collapse collapse"
-				aria-expanded="false" style="height: 1px;">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="/SpringSecurity/welcome">Home</a></li>
-					<li><a href="/SpringSecurity/contactpage">Contact</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-haspopup="true"
-						aria-expanded="false">Evaluation Dropdown <span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a
-								href="/SpringSecurity/residentsimulationevaluationform">Evaluation</a></li>
-							<li><a href="/SpringSecurity/resultsofresidentevaluation">Evaluation
-									Results</a></li>
-							<li><a href="#">Something else here</a></li>
-							<li role="separator" class="divider"></li>
-							<li class="dropdown-header">Nav header</li>
-							<li><a href="#">Separated link</a></li>
-							<li><a href="#">One more separated link</a></li>
-						</ul></li>
-				</ul>
-				<c:if test="${pageContext.request.userPrincipal.name != null}">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a href="javascript:void(0);"
-							class="dropdown-toggle" data-toggle="dropdown"> <span
-								class="glyphicon glyphicon-user"></span> <strong>${pageContext.request.userPrincipal.name}</strong>
-								<span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu">
-								<li>
-									<div class="navbar-login">
-										<div class="row">
-											<div class="col-lg-4">
-												<p class="text-center">
-													<span class="glyphicon glyphicon-user icon-size"></span>
-												</p>
-											</div>
-											<div class="col-lg-8">
-												<p class="text-left">
-													<strong>${pageContext.request.userPrincipal.name}</strong>
-												</p>
-												<p class="text-left small">@rockets.utoledo.edu</p>
-												<p>
-													<a href="#/changepassword"
-														class="btn btn-primary btn-block btn-sm">Change
-														Password</a>
-												</p>
-												<p>
-													<a href="javascript:formSubmit()"
-														class="btn btn-danger btn-block btn-sm">Logout</a>
-												</p>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul></li>
-					</ul>
-				</c:if>
+	<%@include file="header.jsp"%>
 
+	<nav id="ac-localnav" class="container js no-touch css-sticky"
+		lang="en-US" role="navigation">
+		<div class="ac-ln-wrapper">
+			<div class="ac-ln-background"></div>
+			<div class="ac-ln-content">
+				<h2 class="ac-ln-title">Evaluation</h2>
+				<div class="ac-ln-menu">
+					<div class="ac-ln-menu-tray">
+						<ul class="ac-ln-menu-items">
+							<li class="ac-ln-menu-item"><a
+								href="/SpringSecurity/residentsimulationevaluationform"
+								class="ac-ln-menu-link">Evaluation Form</a></li>
+							<li class="ac-ln-menu-item"><span
+								class="ac-ln-menu-link current" role="link" aria-disabled="true">Summary</span></li>
+
+							<!-- <li class="ac-ln-menu-item"><a
+								href="#/viewfullproductionsummary" class="ac-ln-menu-link">Reports</a>
+							</li> -->
+						</ul>
+					</div>
+				</div>
 			</div>
-			<!--/.nav-collapse -->
 		</div>
 	</nav>
-	<div class="container">
+
+	<%-- 	<div class="container" style="padding-top: 25px;">
 		<hr>
 		<div class="row">
 			<div class="panel panel-primary filterable">
-				<div class="panel-heading">
-					<h3 class="panel-title">Evaluation Results</h3>
+				<div class="panel-heading" style="background: #003E7E;">
+
 					<div class="pull-right">
-						<button class="btn btn-default btn-xs btn-filter">
+						<button class="btn btn-primary">
 							<span class="glyphicon glyphicon-filter"></span> Filter
 						</button>
 					</div>
+					<h4>Evaluation Results</h4>
 				</div>
-				<table class="table table-responsive table-hover">
-					<thead>
-						<tr class="filters">
-							<th>&nbsp;</th>
-							<th><input type="text" class="form-control"
-								placeholder="Resident Name" disabled></th>
-							<!-- <th><input type="text" class="form-control"
-								placeholder="Date" disabled></th> -->
-							<th><input type="text" class="form-control"
-								placeholder="Rank" disabled></th>
-							<th><input type="text" class="form-control"
-								placeholder="Medical Knowledge" disabled></th>
-							<!-- <th><input type="text" class="form-control"
-								placeholder="Medical Knowledge Comments" disabled></th> -->
-							<th><input type="text" class="form-control"
-								placeholder="Technical Skills" disabled></th>
-							<!-- <th><input type="text" class="form-control"
-								placeholder="Technical Skills comments" disabled></th> -->
-							<th><input type="text" class="form-control"
-								placeholder="Team Work" disabled></th>
-							<!-- <th><input type="text" class="form-control"
-								placeholder="Team Work comments" disabled></th> -->
-							<th><input type="text" class="form-control"
-								placeholder="Leadership" disabled></th>
-							<!-- <th><input type="text" class="form-control"
-								placeholder="Leadership comments" disabled></th> -->
-							<th><input type="text" class="form-control"
-								placeholder="Professionalism" disabled></th>
-							<!-- <th><input type="text" class="form-control"
-								placeholder="Professionalism comments" disabled></th> -->
-							<!-- <th><input type="text" class="form-control"
-								placeholder="Additional Comments" disabled></th> -->
-							<!-- <th><input type="text" class="form-control"
-								placeholder="Goals" disabled></th> -->
-							<th><input type="text" class="form-control"
-								placeholder="Evaluator Name" disabled></th>
-							<th><input type="text" class="form-control"
-								placeholder="Date" disabled></th>
-						</tr>
-					</thead>
-					<c:forEach var="evaluationrf" items="${listOfRe}">
-						<tbody>
-							<tr>
-								<td>${evaluationrf.id}</td>
-								<td>${evaluationrf.residentName}</td>
-								<%-- <td>${evaluationrf.residentDate}</td> --%>
-								<td>${evaluationrf.residentRank}</td>
-								<td>${evaluationrf.medicalKnowledge}</td>
-								<!-- <td>${evaluationrf.mkComment}</td> -->
-								<td>${evaluationrf.technicalSkills}</td>
-								<!-- <td>${evaluationrf.tsComment}</td> -->
-								<td>${evaluationrf.teamWork}</td>
-								<!--<td>${evaluationrf.twComment}</td> -->
-								<td>${evaluationrf.leadership}</td>
-								<!-- <td>${evaluationrf.lsComment}</td> -->
-								<td>${evaluationrf.professionalism}</td>
-								<!-- <td>${evaluationrf.pfComment}</td> -->
-								<%-- <td>${evaluationrf.evaluationComment}</td> --%>
-								<%-- <td>${evaluationrf.goalsComment}</td> --%>
-								<td>${evaluationrf.evaluatorName}</td>
-								<td>${evaluationrf.evaluatorDate}</td>
-								<td><a
-									href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
+
+				<div class="panel-body">
+
+
+					<table
+						class="table table-responsive table-hover table-bordered table-stripped"
+						style="margin: 0px; padding: 0px;">
+						<thead>
+							<tr class="filters">
+
+								<td colspan="2"><input type="text" class="form-control"
+									placeholder="Resident Name" disabled></td>
+								<!-- <td><input type="text" class="form-control"
+								placeholder="Date" disabled></td> -->
+								<td><input type="text" class="form-control"
+									placeholder="Rank" disabled></td>
+								<td><input type="text" class="form-control"
+									placeholder="Medical Knowledge" disabled></td>
+								<!-- <td><input type="text" class="form-control"
+								placeholder="Medical Knowledge Comments" disabled></td> -->
+								<td><input type="text" class="form-control"
+									placeholder="Technical Skills" disabled></td>
+								<!-- <td><input type="text" class="form-control"
+								placeholder="Technical Skills comments" disabled></td> -->
+								<td><input type="text" class="form-control"
+									placeholder="Team Work" disabled></td>
+								<!-- <td><input type="text" class="form-control"
+								placeholder="Team Work comments" disabled></td> -->
+								<td><input type="text" class="form-control"
+									placeholder="Leadership" disabled></td>
+								<!-- <td><input type="text" class="form-control"
+								placeholder="Leadership comments" disabled></td> -->
+								<td><input type="text" class="form-control"
+									placeholder="Professionalism" disabled></td>
+								<!-- <td><input type="text" class="form-control"
+								placeholder="Professionalism comments" disabled></td> -->
+								<!-- <td><input type="text" class="form-control"
+								placeholder="Additional Comments" disabled></td> -->
+								<!-- <td><input type="text" class="form-control"
+								placeholder="Goals" disabled></td> -->
+								<td><input type="text" class="form-control"
+									placeholder="Evaluator Name" disabled></td>
+								<td><input type="text" class="form-control"
+									placeholder="Date" disabled></td>
 							</tr>
+						</thead>
+
+						<tbody>
+							<c:forEach var="evaluationrf" items="${listOfRe}">
+								<tr>
+									<td>${evaluationrf.id}</td>
+									<td style="white-space: nowrap;">${evaluationrf.residentName}</td>
+									<td>${evaluationrf.residentDate}</td>
+									<td>${evaluationrf.residentRank}</td>
+									<td>${evaluationrf.medicalKnowledge}</td>
+									<!-- <td>${evaluationrf.mkComment}</td> -->
+									<td>${evaluationrf.technicalSkills}</td>
+									<!-- <td>${evaluationrf.tsComment}</td> -->
+									<td>${evaluationrf.teamWork}</td>
+									<!--<td>${evaluationrf.twComment}</td> -->
+									<td>${evaluationrf.leadership}</td>
+									<!-- <td>${evaluationrf.lsComment}</td> -->
+									<td>${evaluationrf.professionalism}</td>
+									<!-- <td>${evaluationrf.pfComment}</td> -->
+									<td>${evaluationrf.evaluationComment}</td>
+									<td>${evaluationrf.goalsComment}</td>
+									<td>${evaluationrf.evaluatorName}</td>
+									<td>${evaluationrf.evaluatorDate}</td>
+									<td style="padding: 0px;"><a
+										class="btn btn-large btn-primary" data-toggle="confirmation"
+										data-title="Open Google?"
+										href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
+								</tr>
+							</c:forEach>
 						</tbody>
-					</c:forEach>
-				</table>
+
+					</table>
+				</div>
 			</div>
 		</div>
+	</div> --%>
+
+
+	<div class="container">
+		<!-- <div class="col-sm-12">
+	<div class="col-sm-2"> -->
+		<div class="fw-body" style="padding-top: 25px;">
+			<table id="example" class="display responsive nowrap" cellspacing="0"
+				width="100%">
+				<thead>
+					<tr>
+						<th>Resident Name</th>
+						<th>Rank</th>
+						<th>Medical Knowledge</th>
+						<th>Technical Skills</th>
+						<th>Team Work</th>
+						<th>Leadership</th>												
+						<th>Professionalism</th>
+						<th>Action</th>
+						<th>Evaluator Name</th>
+						<th>Date</th>
+						<th>Medical Knowledge Comments</th>
+						<th>Technical Skills Comments</th>
+						<th>Team Work Comments</th>
+						<th>Leadership Comments</th>
+						<th>Professionalism Comments</th>
+						<th>Additional Comments</th>
+						<th>Goals</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<c:forEach var="evaluationrf" items="${listOfRe}">
+						<tr>
+							<td>${evaluationrf.residentName}</td>
+							<td>${evaluationrf.residentRank}</td>
+							<td>${evaluationrf.medicalKnowledge}</td>
+							<td>${evaluationrf.technicalSkills}</td>
+							<td>${evaluationrf.teamWork}</td>
+							<td>${evaluationrf.leadership}</td>
+							<td>${evaluationrf.professionalism}</td>							
+							<td style="padding: 0px;"><a
+										class="btn btn-large btn-primary" data-toggle="confirmation"
+										data-title="Open Google?"
+										href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
+							<td>${evaluationrf.evaluatorName}</td>
+							<td>${evaluationrf.evaluatorDate}</td>
+							<td>${evaluationrf.mkComment}</td>
+							<td>${evaluationrf.tsComment}</td>
+							<td>${evaluationrf.twComment}</td>
+							<td>${evaluationrf.lsComment}</td>
+							<td>${evaluationrf.pfComment}</td>
+							<td>${evaluationrf.evaluationComment}</td>
+							<td>${evaluationrf.goalsComment}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
+	<!-- </div>
+</div> -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#example').DataTable();
+		});
+	</script>
+
+
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />

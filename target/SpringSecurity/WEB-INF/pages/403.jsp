@@ -36,7 +36,8 @@
 						<ul class="dropdown-menu">
 							<li><a
 								href="/SpringSecurity/residentsimulationevaluationform">Evaluation</a></li>
-							<li><a href="#">Another Evaluation</a></li>
+							<li><a href="/SpringSecurity/resultsofresidentevaluation">Evaluation
+									Results</a></li>
 							<li><a href="#">Something else here</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Nav header</li>

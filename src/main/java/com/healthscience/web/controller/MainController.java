@@ -1,6 +1,5 @@
 package com.healthscience.web.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,13 +18,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.healthscience.dao.UserInfoDAO;
+import com.healthscience.dao.UserRoleDAO;
 import com.healthscience.model.Evaluationform;
+import com.healthscience.model.UserInfo;
+import com.healthscience.model.UserRole;
 import com.healthscience.service.EvaluationService;
 
 @Controller
 public class MainController {
+	
+	@Autowired
+	private UserInfoDAO userInfoDAO;
+	
+	@Autowired
+	private UserRoleDAO userRoleDAO;
 	
 	private static final Logger logger = Logger
 			.getLogger(MainController.class);
@@ -106,7 +116,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/resultsofresidentevaluation/**")
-	public ModelAndView listEmployee(ModelAndView model) throws IOException {
+	public ModelAndView listofResidentEvaluation(ModelAndView model) throws IOException {
 		List<Evaluationform> listOfRe = evaluationService.getAllResidentEvaluation();
 		model.addObject("listOfRe", listOfRe);
 		model.setViewName("resultsofresidentevaluation");
@@ -123,6 +133,59 @@ public class MainController {
 		model.addObject("listOfRe", listOfRe);
 		model.setViewName("resultsofresidentevaluation");
 		return model;
+	}
+	
+	@RequestMapping(value = "/userform**", method = RequestMethod.GET)
+	public ModelAndView userform() {
+		
+		ModelAndView model = new ModelAndView("userform");
+		List<UserInfo> listOfUserData = userInfoDAO.getUserData();
+		model.addObject("listOfUserData", listOfUserData);
+		UserInfo userInfo = new UserInfo();
+		model.addObject("userInfo", userInfo);
+		return model;
+
+		/*ModelAndView model = new ModelAndView();
+		UserInfo userInfo = new UserInfo();
+		model.addObject("userInfo", userInfo);
+
+		model.setViewName("userform");
+
+		return model;*/
+
+	}
+	
+	@RequestMapping(value="/saveUser", method=RequestMethod.POST)
+	public ModelAndView saveUser(@ModelAttribute UserInfo userInfo, SessionStatus status)
+	{
+		System.out.println("evaluationrf==============="+userInfo.getUsername());
+		userInfoDAO.save(userInfo);
+		List<String> userro = userInfo.getRole();
+		UserRole user = null;
+		if(userro != null){
+			for(String userr : userro){
+				user = new UserRole();
+				user.setRole(userr);
+				user.setUsername(userInfo.getUsername());
+				user.setUserInfo(userInfo);
+				userRoleDAO.save(user);
+				}
+		}
+		status.setComplete();
+		
+		ModelAndView model = new ModelAndView("userform");
+		List<UserInfo> listOfUserData = userInfoDAO.getUserData();
+		model.addObject("listOfUserData", listOfUserData);
+		return model;
+	}
+	
+	@RequestMapping("/resultsofuserdata/**")
+	public ModelAndView getAllUsers()
+	{
+		ModelAndView mav = new ModelAndView("resultsofuserdata");
+		List<UserInfo> listOfUserData = userInfoDAO.getUserData();
+		mav.addObject("listOfUserData", listOfUserData);
+		return mav;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

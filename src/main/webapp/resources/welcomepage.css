@@ -1,8 +1,9 @@
 @CHARSET "ISO-8859-1";
 
 body{
-	padding-top: 70px;
+	padding-top: 150px;
 	min-height: 2000px;
+	    color: #003E7E;
 }
 
 .navbar-login {
@@ -20,4 +21,14 @@ body{
 .icon-size {
     font-size: 87px;
 }
+
+.navbar-default{
+	background: #003E7E;
+}
+
+.navbar-nav {
+    > li > a {
+    	color: white; 
+    }
+
 

@@ -46,7 +46,8 @@
 						<ul class="dropdown-menu">
 							<li><a
 								href="/SpringSecurity/residentsimulationevaluationform">Evaluation</a></li>
-							<li><a href="#">Another Evaluation</a></li>
+							<li><a href="/SpringSecurity/resultsofresidentevaluation">Evaluation
+									Results</a></li>
 							<li><a href="#">Something else here</a></li>
 							<li role="separator" class="divider"></li>
 							<li class="dropdown-header">Nav header</li>
@@ -174,7 +175,7 @@
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="mkComment"
 										path="mkComment" name="mkComment" rows="2"
-										placeholder="comments"></form:textarea>
+										placeholder="comments (Optional)"></form:textarea>
 								</div>
 								<div class="form-group ">
 									<label class="control-label "> Technical Skills </label>
