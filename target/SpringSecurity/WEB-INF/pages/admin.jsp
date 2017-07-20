@@ -2,6 +2,7 @@
 <%@page session="true"%>
 <html>
 <body>
+	<%@include file="header.jsp"%>
 	<h1>Title : ${title}</h1>
 	<h1>Message : ${message}</h1>
 

@@ -9,5 +9,7 @@ public interface UserInfoDAO {
 	List<UserInfo> getUserData();
 	
 	int save(UserInfo userInfo);
+	
+	void deleteUserInfo(String username);
 
 }

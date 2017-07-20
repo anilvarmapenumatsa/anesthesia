@@ -33,6 +33,9 @@ public class UserInfo implements Serializable {
 
 	@Column
 	private int enabled;
+	
+	@Transient
+	private String designation;
 
 	@Transient
 	private List<String> role;
@@ -85,6 +88,14 @@ public class UserInfo implements Serializable {
 
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
+	}
+	
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 }

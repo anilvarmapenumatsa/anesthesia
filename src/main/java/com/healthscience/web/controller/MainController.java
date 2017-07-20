@@ -2,7 +2,6 @@ package com.healthscience.web.controller;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,18 +21,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.healthscience.dao.UserDetailsDAO;
 import com.healthscience.dao.UserInfoDAO;
 import com.healthscience.dao.UserRoleDAO;
 import com.healthscience.model.Evaluationform;
+import com.healthscience.model.UserDetail;
 import com.healthscience.model.UserInfo;
 import com.healthscience.model.UserRole;
 import com.healthscience.service.EvaluationService;
+import com.healthscience.utils.EvaluationFormValidation;
 
 @Controller
 public class MainController {
 	
 	@Autowired
 	private UserInfoDAO userInfoDAO;
+	
+	@Autowired
+	private UserDetailsDAO userDetailsDAO;
 	
 	@Autowired
 	private UserRoleDAO userRoleDAO;
@@ -95,7 +101,7 @@ public class MainController {
 	private EvaluationService evaluationService;
 
 	@RequestMapping(value = "/saveresidentsimulationevaluationform", method = RequestMethod.POST)
-	public ModelAndView saveresidentsimulationevaluationform(@ModelAttribute Evaluationform evaluationrf) {
+	public String saveresidentsimulationevaluationform(@ModelAttribute Evaluationform evaluationrf) {
 		
 		// ModelAndView modelAndView = new ModelAndView();
 		 //System.out.println("evaluationrf==============="+evaluationrf.getResidentName());
@@ -105,14 +111,14 @@ public class MainController {
         // modelAndView.setViewName("hello");
          
         // modelAndView.addObject("evaluation", evaluationrf);
-       
-        
+		
+	      
        evaluationService.addResidentEvaluationData(evaluationrf);
        ModelAndView model = new ModelAndView();
 		List<Evaluationform> listOfRe = evaluationService.getAllResidentEvaluation();
 		model.addObject("listOfRe", listOfRe);
 		model.setViewName("resultsofresidentevaluation");
-		return model;
+		return "redirect:resultsofresidentevaluation";
 	}
 	
 	@RequestMapping(value = "/resultsofresidentevaluation/**")
@@ -160,6 +166,12 @@ public class MainController {
 	{
 		System.out.println("evaluationrf==============="+userInfo.getUsername());
 		userInfoDAO.save(userInfo);
+		UserDetail userDetail = null;
+		userDetail = new UserDetail();
+		userDetail.setUsername(userInfo.getUsername());
+		userDetail.setDesignation(userInfo.getDesignation());
+		userDetail.setUserInfo(userInfo);
+		userDetailsDAO.save(userDetail);
 		List<String> userro = userInfo.getRole();
 		UserRole user = null;
 		if(userro != null){
@@ -182,6 +194,37 @@ public class MainController {
 	@RequestMapping("/resultsofuserdata/**")
 	public ModelAndView getAllUsers()
 	{
+		ModelAndView mav = new ModelAndView("resultsofuserdata");
+		List<UserInfo> listOfUserData = userInfoDAO.getUserData();
+		mav.addObject("listOfUserData", listOfUserData);
+		return mav;
+	}
+	
+	@RequestMapping(value="/updateprofile", method=RequestMethod.GET, params = {"username"})
+	public ModelAndView updateprofile(@RequestParam("username")String username)
+	{
+		ModelAndView mav = new ModelAndView("editprofile");
+		/*List<UserDetail> listofuserDetail = userDetailsDAO.getByusername(username);*/
+		UserDetail userDetail = userDetailsDAO.getByusername(username);
+		mav.addObject("editprofile", userDetail);
+		return mav;
+	}
+	
+	@RequestMapping(value="/updateprofile", method=RequestMethod.POST)
+	public String update(@ModelAttribute("listofuserDetail") UserDetail userDetail,SessionStatus status)
+	{
+		userDetailsDAO.update(userDetail);
+		status.setComplete();
+		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/deleteUserInfo", method=RequestMethod.GET, params = {"username"})
+	public ModelAndView deleteUserInfo(@RequestParam("username")String username)
+	{
+	    System.out.println(username);
+	    userDetailsDAO.deleteUserDetails(username);
+	    userRoleDAO.deleteUserRole(username);
+		userInfoDAO.deleteUserInfo(username);
 		ModelAndView mav = new ModelAndView("resultsofuserdata");
 		List<UserInfo> listOfUserData = userInfoDAO.getUserData();
 		mav.addObject("listOfUserData", listOfUserData);
@@ -225,71 +268,6 @@ public class MainController {
 		model.setViewName("403");
 		return model;
 
-	}
-	
-	@ModelAttribute("grademk")
-	public List<String> getMedicalKnowledge()
-	{
-		List<String> grademk = new ArrayList<String>();
-		grademk.add("Poor");
-		grademk.add("Fair");
-		grademk.add("Satisfactory");
-		grademk.add("Good");
-		grademk.add("Excellent");
-		
-		return grademk;
-	}
-	
-	@ModelAttribute("gradepf")
-	public List<String> getProfessionalism()
-	{
-		List<String> gradepf = new ArrayList<String>();
-		gradepf.add("Poor");
-		gradepf.add("Fair");
-		gradepf.add("Satisfactory");
-		gradepf.add("Good");
-		gradepf.add("Excellent");
-		
-		return gradepf;
-	}
-	
-	@ModelAttribute("gradets")
-	public List<String> getTechnicalSkills()
-	{
-		List<String> gradets = new ArrayList<String>();
-		gradets.add("Poor");
-		gradets.add("Fair");
-		gradets.add("Satisfactory");
-		gradets.add("Good");
-		gradets.add("Excellent");
-		
-		return gradets;
-	}
-	
-	@ModelAttribute("gradetw")
-	public List<String> getTeamWork()
-	{
-		List<String> gradetw = new ArrayList<String>();
-		gradetw.add("Poor");
-		gradetw.add("Fair");
-		gradetw.add("Satisfactory");
-		gradetw.add("Good");
-		gradetw.add("Excellent");
-		
-		return gradetw;
-	}
-	
-	@ModelAttribute("gradels")
-	public List<String> getLeadership()
-	{
-		List<String> gradels = new ArrayList<String>();
-		gradels.add("Poor");
-		gradels.add("Fair");
-		gradels.add("Satisfactory");
-		gradels.add("Good");
-		gradels.add("Excellent");
-		
-		return gradels;
 	}
 
 }

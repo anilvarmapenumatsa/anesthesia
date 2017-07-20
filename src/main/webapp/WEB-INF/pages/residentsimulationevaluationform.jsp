@@ -67,18 +67,18 @@
 								</span>
 							</a></li>
 
-							<li role="presentation" class="disabled"><a href="#complete"
+							<!-- <li role="presentation" class="disabled"><a href="#complete"
 								data-toggle="tab" aria-controls="complete" role="tab"
 								title="Complete"> <span class="round-tab"> <i
 										class="glyphicon glyphicon-ok"></i>
 								</span>
-							</a></li>
+							</a></li> -->
 
 						</ul>
 					</div>
 
 					<form:form action="saveresidentsimulationevaluationform"
-						method="post" modelAttribute="evaluationrf">
+						method="post" modelAttribute="evaluationrf" data-toggle="validator">
 						<div class="tab-content">
 							<div class="tab-pane active" role="tabpanel" id="step1">
 								<form:hidden path="id" />
@@ -90,10 +90,10 @@
 									<div class="container-fluid">
 										<div class="row">
 											<div class="col-md-6 col-sm-6 col-xs-12">
-												<div class="form-group ">
+												<div class="form-group has-feedback">
 													<label class="control-label "> Name </label>
-													<form:input path="residentName" class="form-control"
-														id="residentName" name="residentName" type="text" />
+													<input class="form-control"
+														id="residentName" name="residentName" type="text" required/>
 												</div>
 												<div class="form-group ">
 													<label class="control-label "> Date </label>
@@ -123,51 +123,152 @@
 									</div>
 								</div>
 								<br />
-								<div class="form-group ">
+								<%-- <div class="form-group ">
 									<label class="control-label " style="padding-right: 10px;">
 										Medical Knowledge </label>
-									<%-- <form:radiobuttons class="form-check-input" items="${grademk}"
-										path="medicalKnowledge"></form:radiobuttons> --%>
+									<form:radiobuttons class="form-check-input" items="${grademk}"
+										path="medicalKnowledge"></form:radiobuttons>
 									<form:radiobutton path="medicalKnowledge" value="Poor"
 										label="Poor" class="form-check-input"/>
 									<form:radiobutton path="medicalKnowledge" value="F"
 										label="Female" class="form-check-input"/>
+								</div> --%>
+								<div class="form-group" id="div_medicalKnowledge">
+									<label class="control-label col-sm-2 requiredField"
+										for="medicalKnowledge"> Medical Knowledge <span
+										class="asteriskField"> * </span>
+									</label>
+									<div class="col-sm-10">
+										<label class="radio-inline"> <input
+											name="medicalKnowledge" type="radio" value="Poor" required/> Poor
+										</label> <label class="radio-inline"> <input
+											name="medicalKnowledge" type="radio" value="Fair" required/> Fair
+										</label> <label class="radio-inline"> <input
+											name="medicalKnowledge" type="radio" value="Satisfactory" required/>
+											Satisfactory
+										</label> <label class="radio-inline"> <input
+											name="medicalKnowledge" type="radio" value="Good" required/> Good
+										</label> <label class="radio-inline"> <input
+											name="medicalKnowledge" type="radio" value="Excellent" required/>
+											Excellent
+										</label>
+									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="mkComment"
 										path="mkComment" name="mkComment" rows="2"
 										placeholder="comments (Optional)"></form:textarea>
 								</div>
-								<div class="form-group ">
+								<%-- <div class="form-group ">
 									<label class="control-label "> Technical Skills </label>
 									<form:radiobuttons items="${gradets}" path="technicalSkills"></form:radiobuttons>
+								</div> --%>
+								<div class="form-group" id="div_technicalSkills">
+									<label class="control-label col-sm-2 requiredField"
+										for="technicalSkills"> Technical Skills <span
+										class="asteriskField"> * </span>
+									</label>
+									<div class="col-sm-10">
+										<label class="radio-inline"> <input
+											name="technicalSkills" type="radio" value="Poor" required /> Poor
+										</label> <label class="radio-inline"> <input
+											name="technicalSkills" type="radio" value="Fair" required/> Fair
+										</label> <label class="radio-inline"> <input
+											name="technicalSkills" type="radio" value="Satisfactory" required/>
+											Satisfactory
+										</label> <label class="radio-inline"> <input
+											name="technicalSkills" type="radio" value="Good" required/> Good
+										</label> <label class="radio-inline"> <input
+											name="technicalSkills" type="radio" value="Excellent" required/>
+											Excellent
+										</label>
+									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="tsComment"
 										path="tsComment" name="tsComment" rows="2"
 										placeholder="comments"></form:textarea>
 								</div>
-								<div class="form-group ">
+								<%-- <div class="form-group ">
 									<label class="control-label "> Team Work </label>
 									<form:radiobuttons items="${gradetw}" path="teamWork"></form:radiobuttons>
+								</div> --%>
+								<div class="form-group" id="div_teamWork">
+									<label class="control-label col-sm-2 requiredField"
+										for="teamWork"> Team Work <span class="asteriskField">
+											* </span>
+									</label>
+									<div class="col-sm-10">
+										<label class="radio-inline"> <input name="teamWork"
+											type="radio" value="Poor" required/> Poor
+										</label> <label class="radio-inline"> <input name="teamWork"
+											type="radio" value="Fair" required/> Fair
+										</label> <label class="radio-inline"> <input name="teamWork"
+											type="radio" value="Satisfactory" required/> Satisfactory
+										</label> <label class="radio-inline"> <input name="teamWork"
+											type="radio" value="Good" required/> Good
+										</label> <label class="radio-inline"> <input name="teamWork"
+											type="radio" value="Excellent" required/> Excellent
+										</label>
+									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="twComment"
 										path="twComment" name="twComment" rows="2"
 										placeholder="comments"></form:textarea>
 								</div>
-								<div class="form-group ">
+								<%-- <div class="form-group ">
 									<label class="control-label "> Leadership </label>
 									<form:radiobuttons items="${gradels}" path="leadership"></form:radiobuttons>
+								</div> --%>
+								<div class="form-group" id="div_leadership">
+									<label class="control-label col-sm-2 requiredField"
+										for="leadership"> Leadership <span
+										class="asteriskField"> * </span>
+									</label>
+									<div class="col-sm-10">
+										<label class="radio-inline"> <input name="leadership"
+											type="radio" value="Poor" required/> Poor
+										</label> <label class="radio-inline"> <input name="leadership"
+											type="radio" value="Fair" required/> Fair
+										</label> <label class="radio-inline"> <input name="leadership"
+											type="radio" value="Satisfactory" required/> Satisfactory
+										</label> <label class="radio-inline"> <input name="leadership"
+											type="radio" value="Good" required/> Good
+										</label> <label class="radio-inline"> <input name="leadership"
+											type="radio" value="Excellent" required/> Excellent
+										</label>
+									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="lsComment"
 										path="lsComment" name="lsComment" rows="2"
 										placeholder="comments"></form:textarea>
 								</div>
-								<div class="form-group ">
+								<%-- <div class="form-group ">
 									<label class="control-label "> Professionalism </label>
 									<form:radiobuttons items="${gradepf}" path="professionalism"></form:radiobuttons>
+								</div> --%>
+								<div class="form-group" id="div_professionalism">
+									<label class="control-label col-sm-2 requiredField"
+										for="professionalism"> Professionalism <span
+										class="asteriskField"> * </span>
+									</label>
+									<div class="col-sm-10">
+										<label class="radio-inline"> <input
+											name="professionalism" type="radio" value="Poor" required/> Poor
+										</label> <label class="radio-inline"> <input
+											name="professionalism" type="radio" value="Fair" required /> Fair
+										</label> <label class="radio-inline"> <input
+											name="professionalism" type="radio" value="Satisfactory" required/>
+											Satisfactory
+										</label> <label class="radio-inline"> <input
+											name="professionalism" type="radio" value="Good" required/> Good
+										</label> <label class="radio-inline"> <input
+											name="professionalism" type="radio" value="Excellent" required/>
+											Excellent
+										</label>
+									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="pfComment"
@@ -206,6 +307,7 @@
 														<form:input path="evaluatorDate" class="form-control"
 															id="evaluatorDate" name="evaluatorDate"
 															placeholder="MM/DD/YYYY" type="text" />
+
 													</div>
 												</div>
 											</div>
@@ -213,16 +315,16 @@
 									</div>
 								</div>
 								<ul class="list-inline pull-right">
-									<li><button type="button"
+									<li><!-- <button type="button"
 											class="btn btn-primary btn-info-full next-step">Save
-											and continue</button></li>
+											and continue</button> --><input class="btn btn-primary" type="submit" value="Submit"></li>
 								</ul>
 							</div>
-							<div class="tab-pane" role="tabpanel" id="complete">
+							<!-- <div class="tab-pane" role="tabpanel" id="complete">
 								<h3>Complete</h3>
 								<p>You have successfully completed, please submit.</p>
 								<input class="btn btn-info" type="submit" value="Submit">
-							</div>
+							</div> -->
 							<div class="clearfix"></div>
 						</div>
 					</form:form>

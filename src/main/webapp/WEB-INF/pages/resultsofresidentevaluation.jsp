@@ -61,101 +61,6 @@
 		</div>
 	</nav>
 
-	<%-- 	<div class="container" style="padding-top: 25px;">
-		<hr>
-		<div class="row">
-			<div class="panel panel-primary filterable">
-				<div class="panel-heading" style="background: #003E7E;">
-
-					<div class="pull-right">
-						<button class="btn btn-primary">
-							<span class="glyphicon glyphicon-filter"></span> Filter
-						</button>
-					</div>
-					<h4>Evaluation Results</h4>
-				</div>
-
-				<div class="panel-body">
-
-
-					<table
-						class="table table-responsive table-hover table-bordered table-stripped"
-						style="margin: 0px; padding: 0px;">
-						<thead>
-							<tr class="filters">
-
-								<td colspan="2"><input type="text" class="form-control"
-									placeholder="Resident Name" disabled></td>
-								<!-- <td><input type="text" class="form-control"
-								placeholder="Date" disabled></td> -->
-								<td><input type="text" class="form-control"
-									placeholder="Rank" disabled></td>
-								<td><input type="text" class="form-control"
-									placeholder="Medical Knowledge" disabled></td>
-								<!-- <td><input type="text" class="form-control"
-								placeholder="Medical Knowledge Comments" disabled></td> -->
-								<td><input type="text" class="form-control"
-									placeholder="Technical Skills" disabled></td>
-								<!-- <td><input type="text" class="form-control"
-								placeholder="Technical Skills comments" disabled></td> -->
-								<td><input type="text" class="form-control"
-									placeholder="Team Work" disabled></td>
-								<!-- <td><input type="text" class="form-control"
-								placeholder="Team Work comments" disabled></td> -->
-								<td><input type="text" class="form-control"
-									placeholder="Leadership" disabled></td>
-								<!-- <td><input type="text" class="form-control"
-								placeholder="Leadership comments" disabled></td> -->
-								<td><input type="text" class="form-control"
-									placeholder="Professionalism" disabled></td>
-								<!-- <td><input type="text" class="form-control"
-								placeholder="Professionalism comments" disabled></td> -->
-								<!-- <td><input type="text" class="form-control"
-								placeholder="Additional Comments" disabled></td> -->
-								<!-- <td><input type="text" class="form-control"
-								placeholder="Goals" disabled></td> -->
-								<td><input type="text" class="form-control"
-									placeholder="Evaluator Name" disabled></td>
-								<td><input type="text" class="form-control"
-									placeholder="Date" disabled></td>
-							</tr>
-						</thead>
-
-						<tbody>
-							<c:forEach var="evaluationrf" items="${listOfRe}">
-								<tr>
-									<td>${evaluationrf.id}</td>
-									<td style="white-space: nowrap;">${evaluationrf.residentName}</td>
-									<td>${evaluationrf.residentDate}</td>
-									<td>${evaluationrf.residentRank}</td>
-									<td>${evaluationrf.medicalKnowledge}</td>
-									<!-- <td>${evaluationrf.mkComment}</td> -->
-									<td>${evaluationrf.technicalSkills}</td>
-									<!-- <td>${evaluationrf.tsComment}</td> -->
-									<td>${evaluationrf.teamWork}</td>
-									<!--<td>${evaluationrf.twComment}</td> -->
-									<td>${evaluationrf.leadership}</td>
-									<!-- <td>${evaluationrf.lsComment}</td> -->
-									<td>${evaluationrf.professionalism}</td>
-									<!-- <td>${evaluationrf.pfComment}</td> -->
-									<td>${evaluationrf.evaluationComment}</td>
-									<td>${evaluationrf.goalsComment}</td>
-									<td>${evaluationrf.evaluatorName}</td>
-									<td>${evaluationrf.evaluatorDate}</td>
-									<td style="padding: 0px;"><a
-										class="btn btn-large btn-primary" data-toggle="confirmation"
-										data-title="Open Google?"
-										href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-
-					</table>
-				</div>
-			</div>
-		</div>
-	</div> --%>
-
 
 	<div class="container">
 		<!-- <div class="col-sm-12">
@@ -170,9 +75,8 @@
 						<th>Medical Knowledge</th>
 						<th>Technical Skills</th>
 						<th>Team Work</th>
-						<th>Leadership</th>												
+						<th>Leadership</th>
 						<th>Professionalism</th>
-						<th>Action</th>
 						<th>Evaluator Name</th>
 						<th>Date</th>
 						<th>Medical Knowledge Comments</th>
@@ -182,6 +86,7 @@
 						<th>Professionalism Comments</th>
 						<th>Additional Comments</th>
 						<th>Goals</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 
@@ -194,11 +99,7 @@
 							<td>${evaluationrf.technicalSkills}</td>
 							<td>${evaluationrf.teamWork}</td>
 							<td>${evaluationrf.leadership}</td>
-							<td>${evaluationrf.professionalism}</td>							
-							<td style="padding: 0px;"><a
-										class="btn btn-large btn-primary" data-toggle="confirmation"
-										data-title="Open Google?"
-										href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
+							<td>${evaluationrf.professionalism}</td>
 							<td>${evaluationrf.evaluatorName}</td>
 							<td>${evaluationrf.evaluatorDate}</td>
 							<td>${evaluationrf.mkComment}</td>
@@ -208,6 +109,8 @@
 							<td>${evaluationrf.pfComment}</td>
 							<td>${evaluationrf.evaluationComment}</td>
 							<td>${evaluationrf.goalsComment}</td>
+							<td><a class="btn btn-info"
+								href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

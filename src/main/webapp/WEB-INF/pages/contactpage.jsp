@@ -46,33 +46,12 @@
 						<li><p>
 								<span class="glyphicon glyphicon-new-window one"
 									style="width: 50px;"></span><a
-									href="https://www.eng.utoledo.edu/eecs/faculty_web/~vdevabhaktuni/">Profile
-
-
-
-								
-							</p> </a>
+									href="https://www.eng.utoledo.edu/eecs/faculty_web/~vdevabhaktuni/">Profile </a></p>
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<sec:authorize access="hasRole('ROLE_USER')">
-		<!-- For login user -->
-		<c:url value="/j_spring_security_logout" var="logoutUrl" />
-		<form action="${logoutUrl}" method="post" id="logoutForm">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
-		<script>
-			function formSubmit() {
-				document.getElementById("logoutForm").submit();
-			}
-		</script>
-
-	</sec:authorize>
-
-
-</body>
+	</body>
 </html>

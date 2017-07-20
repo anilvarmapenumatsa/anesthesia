@@ -71,6 +71,7 @@
 						<th>User name</th>
 						<th>Password</th>
 						<th>Enabled</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 
@@ -80,6 +81,8 @@
 							<td>${userInfo.username}</td>
 							<td>${userInfo.password}</td>
 							<td>${userInfo.enabled}</td>
+							<td><a class="btn btn-info"
+								href="deleteUserInfo?username=${userInfo.username}">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

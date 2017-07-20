@@ -63,31 +63,44 @@
 							<label class="control-label " for="password"> Password </label> <input
 								class="form-control" id="password" name="password" type="text" />
 						</div>
-						<div class="form-group" id="div_enabled">
-							<label class="control-label " for="enabled"> Enabled </label>
-							<div class="">
-								<label class="radio-inline"> <input name="enabled"
-									type="radio" value="1" /> Yes
-								</label> <label class="radio-inline"> <input name="enabled"
-									type="radio" value="0" /> No
-								</label>
+						<div class="container">
+							<div class="form-group" id="div_enabled">
+								<label class="control-label " for="desigantion">
+									Designation </label>
+								<div class="">
+									<label class="radio-inline"> <input name="designation"
+										type="radio" value="Student" /> Student
+									</label> <label class="radio-inline"> <input name="designation"
+										type="radio" value="Lecturer" /> Lecturer
+									</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="div_role">
-							<label class="control-label " for="role"> Role </label>
-							<div class=" ">
-								<label class="checkbox-inline"> <input name="role"
-									type="checkbox" value="ROLE_ADMIN" /> Admin
-								</label> <label class="checkbox-inline"> <input name="role"
-									type="checkbox" value="ROLE_USER" /> User
-								</label>
+							<div class="form-group" id="div_enabled">
+								<label class="control-label " for="enabled"> Enabled </label>
+								<div class="">
+									<label class="radio-inline"> <input name="enabled"
+										type="radio" value="1" /> Yes
+									</label> <label class="radio-inline"> <input name="enabled"
+										type="radio" value="0" /> No
+									</label>
+								</div>
 							</div>
-						</div>
+							<div class="form-group" id="div_role">
+								<label class="control-label " for="role"> Role </label>
+								<div class=" ">
+									<label class="checkbox-inline"> <input name="role"
+										type="checkbox" value="ROLE_ADMIN" /> Admin
+									</label> <label class="checkbox-inline"> <input name="role"
+										type="checkbox" value="ROLE_USER" /> User
+									</label>
+								</div>
+							</div>
 
-						<div class="form-group">
-							<div>
-								<button class="btn btn-primary " name="submit" type="submit">
-									Submit</button>
+							<div class="form-group">
+								<div>
+									<button class="btn btn-primary " name="submit" type="submit">
+										Submit</button>
+								</div>
 							</div>
 						</div>
 					</form:form>
@@ -96,25 +109,11 @@
 		</div>
 
 		<script type="text/javascript">
-		$(document).ready(function() {
-			$('#example').DataTable();
-		});
-	</script>
-
-	</div>
-	<sec:authorize access="hasRole('ROLE_USER')">
-		<!-- For login user -->
-		<c:url value="/j_spring_security_logout" var="logoutUrl" />
-		<form action="${logoutUrl}" method="post" id="logoutForm">
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-		</form>
-		<script>
-			function formSubmit() {
-				document.getElementById("logoutForm").submit();
-			}
+			$(document).ready(function() {
+				$('#example').DataTable();
+			});
 		</script>
 
-	</sec:authorize>
+	</div>
 </body>
 </html>

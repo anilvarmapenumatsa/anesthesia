@@ -5,5 +5,7 @@ import com.healthscience.model.UserRole;
 public interface UserRoleDAO {
 	
 	int save(UserRole userRole);
+	
+	void deleteUserRole(String username);
 
 }
