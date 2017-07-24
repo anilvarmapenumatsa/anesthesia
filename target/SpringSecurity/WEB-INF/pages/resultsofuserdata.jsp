@@ -61,8 +61,6 @@
 		</div>
 	</nav>
 	<div class="container">
-		<!-- <div class="col-sm-12">
-	<div class="col-sm-2"> -->
 		<div class="fw-body" style="padding-top: 25px;">
 			<table id="example" class="display responsive nowrap" cellspacing="0"
 				width="100%">
@@ -74,28 +72,68 @@
 						<th>Action</th>
 					</tr>
 				</thead>
-
-				<tbody>
-					<c:forEach var="userInfo" items="${listOfUserData}">
+				<c:forEach var="userInfo" items="${listOfUserData}">
+					<tbody>
 						<tr>
 							<td>${userInfo.username}</td>
 							<td>${userInfo.password}</td>
 							<td>${userInfo.enabled}</td>
-							<td><a class="btn btn-info"
-								href="deleteUserInfo?username=${userInfo.username}">Delete</a></td>
+							<td><a href="#" class="btn btn-danger btn-xs"
+								data-toggle="modal" data-target="#delete"><span
+									class="glyphicon glyphicon-trash"></span></a>
+								<div class="modal fade" id="delete" tabindex="-1" role="dialog"
+									aria-labelledby="delete" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal"
+													aria-hidden="true">&times;</button>
+												<h4 class="modal-title" id="myModalLabel">UserName :
+													${userInfo.username}</h4>
+											</div>
+											<div class="modal-body">
+												<h3>Are you sure you want to delete this Record?</h3>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-default"
+													data-dismiss="modal">
+													<span class="glyphicon glyphicon-remove"></span>No
+												</button>
+												<a class="btn btn-info"
+													href="deleteUserInfo?username=${userInfo.username}"><span
+													class="glyphicon glyphicon-ok-sign"></span>Yes</a>
+											</div>
+										</div>
+									</div>
+								</div></td>
 						</tr>
-					</c:forEach>
-				</tbody>
+
+					</tbody>
+				</c:forEach>
 			</table>
 		</div>
 	</div>
-	<!-- </div>
-</div> -->
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#example').DataTable();
 		});
 	</script>
+
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
+		<!-- For login user -->
+		<c:url value="/j_spring_security_logout" var="logoutUrl" />
+		<form action="${logoutUrl}" method="post" id="logoutForm">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+		</form>
+		<script>
+			function formSubmit() {
+				document.getElementById("logoutForm").submit();
+			}
+		</script>
+	</sec:authorize>
+
+
 
 
 

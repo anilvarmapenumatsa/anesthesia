@@ -9,12 +9,15 @@
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
 <script src="<c:url value="/bootstrapjs/jquery-3.2.1.js" />"></script>
 <script src="<c:url value="/bootstrapjs/bootstrap.js" />"></script>
+<script src="<c:url value="/bootstrapjs/bootstrapValidator.min.js" />"></script>
 
 <link href="<c:url value="/bootstrapcss/bootstrap.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/bootstrapcss/bootstrap-theme.css" />"
 	rel="stylesheet">
 <link href="<c:url value="/bootstrapcss/applenavbar.min.css" />"
+	rel="stylesheet">
+<link href="<c:url value="/bootstrapcss/bootstrapValidator.min.css" />"
 	rel="stylesheet">
 
 
@@ -54,67 +57,64 @@
 			<div class="row clearfix">
 				<div class="col-md-6 col-md-offset-3 column">
 					<form:form action="saveUser" method="post"
-						modelAttribute="userInfo">
+						modelAttribute="userInfo" id="evalform">
 						<div class="form-group " style="padding-top: 25px;">
 							<label class="control-label " for="username"> Name </label> <input
-								class="form-control" id="username" name="username" type="text" />
+								class="form-control" id="username" name="username" type="text"
+								required />
 						</div>
 						<div class="form-group ">
 							<label class="control-label " for="password"> Password </label> <input
-								class="form-control" id="password" name="password" type="text" />
+								class="form-control" id="password" name="password"
+								type="password" data-minlength="6" required />
 						</div>
 						<div class="container">
-						<div class="form-group" id="div_enabled">
-							<label class="control-label " for="desigantion"> Designation </label>
-							<div class="">
-								<label class="radio-inline"> <input name="designation"
-									type="radio" value="Student" /> Student
-								</label> <label class="radio-inline"> <input name="designation"
-									type="radio" value="Lecturer" /> Lecturer
-								</label>
+							<div class="form-group" id="div_enabled">
+								<label class="control-label " for="desigantion">
+									Designation </label>
+								<div class="">
+									<label class="radio-inline"> <input name="designation"
+										type="radio" value="Student" required /> Student
+									</label> <label class="radio-inline"> <input name="designation"
+										type="radio" value="Lecturer" required /> Lecturer
+									</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="div_enabled">
-							<label class="control-label " for="enabled"> Enabled </label>
-							<div class="">
-								<label class="radio-inline"> <input name="enabled"
-									type="radio" value="1" /> Yes
-								</label> <label class="radio-inline"> <input name="enabled"
-									type="radio" value="0" /> No
-								</label>
+							<div class="form-group" id="div_enabled">
+								<label class="control-label " for="enabled"> Enabled </label>
+								<div class="">
+									<label class="radio-inline"> <input name="enabled"
+										type="radio" value="1" required /> Yes
+									</label> <label class="radio-inline"> <input name="enabled"
+										type="radio" value="0" required /> No
+									</label>
+								</div>
 							</div>
-						</div>
-						<div class="form-group" id="div_role">
-							<label class="control-label " for="role"> Role </label>
-							<div class=" ">
-								<label class="checkbox-inline"> <input name="role"
-									type="checkbox" value="ROLE_ADMIN" /> Admin
-								</label> <label class="checkbox-inline"> <input name="role"
-									type="checkbox" value="ROLE_USER" /> User
-								</label>
+							<div class="form-group" id="div_role">
+								<label class="control-label " for="role"> Role </label>
+								<div class=" ">
+									<label class="checkbox-inline"><input name="role"
+										type="checkbox" value="ROLE_ADMIN" /> Admin </label> <label
+										class="checkbox-inline"> <input name="role"
+										type="checkbox" value="ROLE_USER" required /> User
+									</label>
+								</div>
 							</div>
-						</div>
 
-						<div class="form-group">
-							<div>
-								<button class="btn btn-primary " name="submit" type="submit">
-									Submit</button>
+							<div class="form-group">
+								<div>
+									<button class="btn btn-primary " name="submit" type="submit">
+										Submit</button>
+								</div>
 							</div>
-						</div>
 						</div>
 					</form:form>
 				</div>
 			</div>
 		</div>
-
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$('#example').DataTable();
-		});
-	</script>
-
 	</div>
-	<sec:authorize access="hasRole('ROLE_USER')">
+
+	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />
 		<form action="${logoutUrl}" method="post" id="logoutForm">
@@ -126,7 +126,6 @@
 				document.getElementById("logoutForm").submit();
 			}
 		</script>
-
 	</sec:authorize>
 </body>
 </html>

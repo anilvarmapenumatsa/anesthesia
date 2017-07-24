@@ -14,6 +14,10 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="<c:url value="/resources/residentEvaluationForm.js" />"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
 <link href="<c:url value="/bootstrapcss/bootstrap.css" />"
 	rel="stylesheet">
@@ -21,6 +25,8 @@
 	rel="stylesheet">
 <link href="<c:url value="/bootstrapcss/applenavbar.min.css" />"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 <link href="<c:url value="/resources/welcomepage.css" />"
 	rel="stylesheet">
 </head>
@@ -78,7 +84,8 @@
 					</div>
 
 					<form:form action="saveresidentsimulationevaluationform"
-						method="post" modelAttribute="evaluationrf" data-toggle="validator">
+						method="post" modelAttribute="evaluationrf"
+						data-toggle="validator">
 						<div class="tab-content">
 							<div class="tab-pane active" role="tabpanel" id="step1">
 								<form:hidden path="id" />
@@ -91,20 +98,20 @@
 										<div class="row">
 											<div class="col-md-6 col-sm-6 col-xs-12">
 												<div class="form-group has-feedback">
-													<label class="control-label "> Name </label>
-													<input class="form-control"
-														id="residentName" name="residentName" type="text" required/>
+													<label class="control-label "> Name </label> <!-- <input
+														class="form-control" id="residentName" name="residentName"
+														type="text" required /> -->
+													<form:select class="form-control" path="residentName">
+														<form:options items="${listOfUserNames}" />
+													</form:select>
 												</div>
-												<div class="form-group ">
-													<label class="control-label "> Date </label>
-													<div class="input-group">
-														<div class="input-group-addon">
-															<i class="fa fa-calendar"> </i>
-														</div>
-														<form:input path="residentDate" class="form-control"
-															id="residentDate" name="residentDate"
-															placeholder="MM/DD/YYYY" type="text" />
-													</div>
+												<div class="form-group has-feedback">
+													<label class="control-label "> Form Name </label> <!-- <input
+														class="form-control" id="residentName" name="residentName"
+														type="text" required /> -->
+													<form:select class="form-control" path="residentDate">
+														<form:options items="${listOfUserFromNames}" />
+													</form:select>
 												</div>
 												<div class="form-group ">
 													<label class="control-label "> Rank </label>
@@ -140,17 +147,20 @@
 									</label>
 									<div class="col-sm-10">
 										<label class="radio-inline"> <input
-											name="medicalKnowledge" type="radio" value="Poor" required/> Poor
+											name="medicalKnowledge" type="radio" value="Poor" required />
+											Poor
 										</label> <label class="radio-inline"> <input
-											name="medicalKnowledge" type="radio" value="Fair" required/> Fair
+											name="medicalKnowledge" type="radio" value="Fair" required />
+											Fair
 										</label> <label class="radio-inline"> <input
-											name="medicalKnowledge" type="radio" value="Satisfactory" required/>
-											Satisfactory
+											name="medicalKnowledge" type="radio" value="Satisfactory"
+											required /> Satisfactory
 										</label> <label class="radio-inline"> <input
-											name="medicalKnowledge" type="radio" value="Good" required/> Good
+											name="medicalKnowledge" type="radio" value="Good" required />
+											Good
 										</label> <label class="radio-inline"> <input
-											name="medicalKnowledge" type="radio" value="Excellent" required/>
-											Excellent
+											name="medicalKnowledge" type="radio" value="Excellent"
+											required /> Excellent
 										</label>
 									</div>
 								</div>
@@ -161,7 +171,7 @@
 								</div>
 								<%-- <div class="form-group ">
 									<label class="control-label "> Technical Skills </label>
-									<form:radiobuttons items="${gradets}" path="technicalSkills"></form:radiobuttons>
+									<form:radiobuttons items="${listOfUserNames}" path="technicalSkills"></form:radiobuttons>
 								</div> --%>
 								<div class="form-group" id="div_technicalSkills">
 									<label class="control-label col-sm-2 requiredField"
@@ -170,24 +180,27 @@
 									</label>
 									<div class="col-sm-10">
 										<label class="radio-inline"> <input
-											name="technicalSkills" type="radio" value="Poor" required /> Poor
+											name="technicalSkills" type="radio" value="Poor" required />
+											Poor
 										</label> <label class="radio-inline"> <input
-											name="technicalSkills" type="radio" value="Fair" required/> Fair
+											name="technicalSkills" type="radio" value="Fair" required />
+											Fair
 										</label> <label class="radio-inline"> <input
-											name="technicalSkills" type="radio" value="Satisfactory" required/>
-											Satisfactory
+											name="technicalSkills" type="radio" value="Satisfactory"
+											required /> Satisfactory
 										</label> <label class="radio-inline"> <input
-											name="technicalSkills" type="radio" value="Good" required/> Good
+											name="technicalSkills" type="radio" value="Good" required />
+											Good
 										</label> <label class="radio-inline"> <input
-											name="technicalSkills" type="radio" value="Excellent" required/>
-											Excellent
+											name="technicalSkills" type="radio" value="Excellent"
+											required /> Excellent
 										</label>
 									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="tsComment"
 										path="tsComment" name="tsComment" rows="2"
-										placeholder="comments"></form:textarea>
+										placeholder="comments (Optional)"></form:textarea>
 								</div>
 								<%-- <div class="form-group ">
 									<label class="control-label "> Team Work </label>
@@ -200,27 +213,31 @@
 									</label>
 									<div class="col-sm-10">
 										<label class="radio-inline"> <input name="teamWork"
-											type="radio" value="Poor" required/> Poor
+											type="radio" value="Poor" required /> Poor
 										</label> <label class="radio-inline"> <input name="teamWork"
-											type="radio" value="Fair" required/> Fair
+											type="radio" value="Fair" required /> Fair
 										</label> <label class="radio-inline"> <input name="teamWork"
-											type="radio" value="Satisfactory" required/> Satisfactory
+											type="radio" value="Satisfactory" required /> Satisfactory
 										</label> <label class="radio-inline"> <input name="teamWork"
-											type="radio" value="Good" required/> Good
+											type="radio" value="Good" required /> Good
 										</label> <label class="radio-inline"> <input name="teamWork"
-											type="radio" value="Excellent" required/> Excellent
+											type="radio" value="Excellent" required /> Excellent
 										</label>
 									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="twComment"
 										path="twComment" name="twComment" rows="2"
-										placeholder="comments"></form:textarea>
+										placeholder="comments (Optional)"></form:textarea>
 								</div>
 								<%-- <div class="form-group ">
 									<label class="control-label "> Leadership </label>
 									<form:radiobuttons items="${gradels}" path="leadership"></form:radiobuttons>
 								</div> --%>
+								<%-- <form:select path="country">
+									<form:option value="" label="...." />
+									<form:options items="${getUserNames}" />
+								</form:select> --%>
 								<div class="form-group" id="div_leadership">
 									<label class="control-label col-sm-2 requiredField"
 										for="leadership"> Leadership <span
@@ -228,22 +245,22 @@
 									</label>
 									<div class="col-sm-10">
 										<label class="radio-inline"> <input name="leadership"
-											type="radio" value="Poor" required/> Poor
+											type="radio" value="Poor" required /> Poor
 										</label> <label class="radio-inline"> <input name="leadership"
-											type="radio" value="Fair" required/> Fair
+											type="radio" value="Fair" required /> Fair
 										</label> <label class="radio-inline"> <input name="leadership"
-											type="radio" value="Satisfactory" required/> Satisfactory
+											type="radio" value="Satisfactory" required /> Satisfactory
 										</label> <label class="radio-inline"> <input name="leadership"
-											type="radio" value="Good" required/> Good
+											type="radio" value="Good" required /> Good
 										</label> <label class="radio-inline"> <input name="leadership"
-											type="radio" value="Excellent" required/> Excellent
+											type="radio" value="Excellent" required /> Excellent
 										</label>
 									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="lsComment"
 										path="lsComment" name="lsComment" rows="2"
-										placeholder="comments"></form:textarea>
+										placeholder="comments (Optional)"></form:textarea>
 								</div>
 								<%-- <div class="form-group ">
 									<label class="control-label "> Professionalism </label>
@@ -256,37 +273,41 @@
 									</label>
 									<div class="col-sm-10">
 										<label class="radio-inline"> <input
-											name="professionalism" type="radio" value="Poor" required/> Poor
+											name="professionalism" type="radio" value="Poor" required />
+											Poor
 										</label> <label class="radio-inline"> <input
-											name="professionalism" type="radio" value="Fair" required /> Fair
+											name="professionalism" type="radio" value="Fair" required />
+											Fair
 										</label> <label class="radio-inline"> <input
-											name="professionalism" type="radio" value="Satisfactory" required/>
-											Satisfactory
+											name="professionalism" type="radio" value="Satisfactory"
+											required /> Satisfactory
 										</label> <label class="radio-inline"> <input
-											name="professionalism" type="radio" value="Good" required/> Good
+											name="professionalism" type="radio" value="Good" required />
+											Good
 										</label> <label class="radio-inline"> <input
-											name="professionalism" type="radio" value="Excellent" required/>
-											Excellent
+											name="professionalism" type="radio" value="Excellent"
+											required /> Excellent
 										</label>
 									</div>
 								</div>
 								<div class="form-group ">
 									<form:textarea class="form-control" cols="20" id="pfComment"
 										path="pfComment" name="pfComment" rows="2"
-										placeholder="comments"></form:textarea>
+										placeholder="comments (Optional)"></form:textarea>
 								</div>
 								<br />
 								<div class="form-group ">
 									<label class="control-label "> Additional Comments </label>
 									<form:textarea class="form-control" cols="20"
 										id="evaluationComment" path="evaluationComment"
-										name="evaluationComment" rows="5" placeholder="comments"></form:textarea>
+										name="evaluationComment" rows="5"
+										placeholder="comments (Optional)"></form:textarea>
 								</div>
 								<div class="form-group ">
 									<label class="control-label "> Goals </label>
 									<form:textarea class="form-control" cols="20" id="goalsComment"
 										path="goalsComment" name="goalsComment" rows="5"
-										placeholder="comments"></form:textarea>
+										placeholder="comments (Optional)"></form:textarea>
 								</div>
 								<br />
 								<div class="bootstrap-iso">
@@ -294,9 +315,9 @@
 										<div class="row">
 											<div class="col-md-6 col-sm-6 col-xs-12">
 												<div class="form-group ">
-													<label class="control-label "> Evaluator Name </label>
-													<form:input path="evaluatorName" class="form-control"
-														id="evaluatorName" name="evaluatorName" type="text" />
+													<label class="control-label "> Evaluator Name </label> <input
+														class="form-control" id="evaluatorName"
+														name="evaluatorName" type="text" required />
 												</div>
 												<div class="form-group ">
 													<label class="control-label " for="date"> Date </label>
@@ -304,9 +325,9 @@
 														<div class="input-group-addon">
 															<i class="fa fa-calendar"> </i>
 														</div>
-														<form:input path="evaluatorDate" class="form-control"
-															id="evaluatorDate" name="evaluatorDate"
-															placeholder="MM/DD/YYYY" type="text" />
+														<input class="form-control" id="evaluatorDate"
+															name="evaluatorDate" placeholder="MM/DD/YYYY" type="text"
+															required />
 
 													</div>
 												</div>
@@ -315,9 +336,12 @@
 									</div>
 								</div>
 								<ul class="list-inline pull-right">
-									<li><!-- <button type="button"
+									<li>
+										<!-- <button type="button"
 											class="btn btn-primary btn-info-full next-step">Save
-											and continue</button> --><input class="btn btn-primary" type="submit" value="Submit"></li>
+											and continue</button> --> <input class="btn btn-primary"
+										type="submit" value="Submit">
+									</li>
 								</ul>
 							</div>
 							<!-- <div class="tab-pane" role="tabpanel" id="complete">
@@ -332,6 +356,30 @@
 			</section>
 		</div>
 	</div>
+
+	<ul>
+		<c:forEach var="getUserNames" items="${getUserNames}">
+			<li>${getUserNames}</li>
+		</c:forEach>
+	</ul>
+
+
+
+	<!-- Include Date Range Picker -->
+	<script>
+		$(document).ready(
+				function() {
+					var date_input = $('input[name="evaluatorDate"]'); //our date input has the name "date"
+					var container = $('.bootstrap-iso form').length > 0 ? $(
+							'.bootstrap-iso form').parent() : "body";
+					date_input.datepicker({
+						format : 'mm/dd/yyyy',
+						container : container,
+						todayHighlight : true,
+						autoclose : true,
+					})
+				})
+	</script>
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<!-- For login user -->
 		<c:url value="/j_spring_security_logout" var="logoutUrl" />

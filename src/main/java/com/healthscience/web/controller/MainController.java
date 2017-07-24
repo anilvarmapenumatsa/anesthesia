@@ -26,6 +26,7 @@ import com.healthscience.dao.UserInfoDAO;
 import com.healthscience.dao.UserRoleDAO;
 import com.healthscience.model.Evaluationform;
 import com.healthscience.model.UserDetail;
+import com.healthscience.model.UserEvaluationFormNames;
 import com.healthscience.model.UserInfo;
 import com.healthscience.model.UserRole;
 import com.healthscience.service.EvaluationService;
@@ -89,6 +90,12 @@ public class MainController {
 		ModelAndView model = new ModelAndView();
 		Evaluationform evaluationrf = new Evaluationform();
 		model.addObject("evaluationrf", evaluationrf);
+
+		List<String> listOfUserNames = userInfoDAO.getUserNames();
+	    model.addObject("listOfUserNames", listOfUserNames);
+	    
+	    List<String> listOfUserFromNames = userInfoDAO.getUserFormNames();
+	    model.addObject("listOfUserFromNames", listOfUserFromNames);
 
 		model.setViewName("residentsimulationevaluationform");
 
@@ -248,7 +255,24 @@ public class MainController {
 		return model;
 
 	}
+	
+	@RequestMapping(value = "/evaluationformnames/**", method = RequestMethod.GET)
+	public ModelAndView evaluationformnames() {
 
+		ModelAndView model = new ModelAndView();
+		UserEvaluationFormNames userEvaluationFormNames = new UserEvaluationFormNames();
+		model.addObject("userEvaluationFormNames", userEvaluationFormNames);
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/saveevaluationformnames", method = RequestMethod.POST)
+	public String saveevaluationformnames(@ModelAttribute UserEvaluationFormNames userEvaluationFormNames) {   
+       userInfoDAO.addUserEvaluationFromNames(userEvaluationFormNames);
+       ModelAndView model = new ModelAndView();
+		return "redirect:residentsimulationevaluationform";
+	}
+	
 	// for 403 access denied page
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
 	public ModelAndView accesssDenied() {

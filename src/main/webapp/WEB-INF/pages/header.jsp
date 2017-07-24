@@ -31,30 +31,30 @@
 			</header>
 			<ul class="nav navbar-nav">
 				<li><a href="/SpringSecurity/welcome"
-					style="color: white; background: #003E7E; padding-left: 0px; text-transform: uppercase;font-weight: 500;font-size: 1.2em;">Home</a></li>
+					style="color: white; background: #003E7E; padding-left: 0px; text-transform: uppercase; font-weight: 500; font-size: 1.2em;">Home</a></li>
 				<li><a href="/SpringSecurity/contactpage"
-					style="color: white; background: #003E7E; text-transform: uppercase;font-weight: 500;font-size: 1.2em;">Contact</a></li>
+					style="color: white; background: #003E7E; text-transform: uppercase; font-weight: 500; font-size: 1.2em;">Contact</a></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
 					aria-expanded="false"
-					style="color: white; text-transform: uppercase;font-weight: 500;font-size: 1.2em;">Evaluation
+					style="color: white; text-transform: uppercase; font-weight: 500; font-size: 1.2em;">Evaluation
 						Dropdown <span class="caret"></span>
 				</a>
-					<ul class="dropdown-menu"
-						style="background: #003E7E;">
+					<ul class="dropdown-menu" style="background: #003E7E;">
 						<li><a
 							href="/SpringSecurity/residentsimulationevaluationform"
-							style="color: white;">Evaluation
-								submission & summary</a></li>
+							style="color: white;">Evaluation submission & summary</a></li>
 						<!-- <li><a href="/SpringSecurity/resultsofresidentevaluation"
 								style="color: white;">Evaluation Results</a></li> -->
-						<li><a href="/SpringSecurity/userform"
-							style="color: white;">Users
+						<li><a href="/SpringSecurity/userform" style="color: white;">Users
 								submission & summary</a></li>
 						<!-- <li><a href="/SpringSecurity/updateprofile"
 								style="color: white;">update profile</a></li> -->
 						<!-- <li><a href="#" style="color: white;">One more separated
 									link</a></li> -->
+						<li><a
+							href="/SpringSecurity/evaluationformnames"
+							style="color: white;">Form Types</a></li>
 					</ul></li>
 			</ul>
 			<c:if test="${pageContext.request.userPrincipal.name != null}">
@@ -79,11 +79,11 @@
 												<strong>${pageContext.request.userPrincipal.name}</strong>
 											</p>
 											<p class="text-left small" style="color: white;">@rockets.utoledo.edu</p>
-											<p>
+											<!-- <p>
 												<a href="#/changepassword"
 													class="btn btn-primary btn-block btn-sm"
 													style="color: white;">Change Password</a>
-											</p>
+											</p> -->
 											<p>
 												<a
 													href="updateprofile?username=${pageContext.request.userPrincipal.name}"

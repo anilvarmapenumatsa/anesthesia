@@ -86,6 +86,7 @@
 						<th>Professionalism Comments</th>
 						<th>Additional Comments</th>
 						<th>Goals</th>
+						<th>Form type</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -109,6 +110,7 @@
 							<td>${evaluationrf.pfComment}</td>
 							<td>${evaluationrf.evaluationComment}</td>
 							<td>${evaluationrf.goalsComment}</td>
+							<td>${evaluationrf.residentDate}</td>
 							<td><a class="btn btn-info"
 								href="deleteEvaluationInformation?id=${evaluationrf.id}">Delete</a></td>
 						</tr>

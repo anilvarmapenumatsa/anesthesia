@@ -2,12 +2,18 @@ package com.healthscience.dao;
 
 import java.util.List;
 
+import javax.websocket.Session;
+
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.healthscience.model.UserEvaluationFormNames;
 import com.healthscience.model.UserInfo;
 
 @Repository
@@ -45,6 +51,37 @@ public class UserInfoDAOImpl implements UserInfoDAO{
 		String hql = "delete from UserInfo where username= :username";
 		sessionFactory.getCurrentSession().createQuery(hql).setString("username", username).executeUpdate();
 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<String> getUserNames()
+	{
+		/*Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserInfo.class);*/
+		
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserInfo.class)
+			    .setProjection(Projections.projectionList()
+			      .add(Projections.property("username"), "username"));
+		 return criteria.list();
+		 
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<String> getUserFormNames()
+	{
+		/*Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserInfo.class);*/
+		
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(UserEvaluationFormNames.class)
+			    .setProjection(Projections.projectionList()
+			      .add(Projections.property("formnames"), "formnames"));
+		 return criteria.list();
+		 
+		
+	}
+
+	@Override
+	public int addUserEvaluationFromNames(UserEvaluationFormNames userEvaluationFormNames) {
+		return (Integer) sessionFactory.getCurrentSession().save(userEvaluationFormNames);
 	}
 
 }

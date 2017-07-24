@@ -10,6 +10,8 @@
 		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/residentsimulationevaluationform**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/resultsofresidentevaluation**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/userform**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/resultsofuserdata**" access="hasRole('ROLE_ADMIN')" />
 		
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />
