@@ -24,24 +24,39 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/spring-security.xml,
-			/WEB-INF/spring-database.xml
+			/WEB-INF/spring-database.xml,
+			/WEB-INF/mvc-dispatcher-servlet.xml
 		</param-value>
 	</context-param>
 
 	<!-- Spring Security -->
+	<filter>
+		<display-name>MultipartFilter</display-name>
+		<filter-name>MultipartFilter</filter-name>
+		<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+	</filter>
+
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 
 	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-name>MultipartFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
 	<mime-mapping>
-        <extension>eot</extension>
-        <mime-type>application/vnd.ms-fontobject</mime-type>
-    </mime-mapping>
+		<extension>eot</extension>
+		<mime-type>application/vnd.ms-fontobject</mime-type>
+	</mime-mapping>	
 
 </web-app>

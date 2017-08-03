@@ -2,19 +2,16 @@ package com.healthscience.dao;
 
 import java.util.List;
 
-import javax.websocket.Session;
-
 import org.hibernate.Criteria;
-import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
-import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.healthscience.model.UserEvaluationFormNames;
 import com.healthscience.model.UserInfo;
+
 
 @Repository
 @Transactional
@@ -83,5 +80,4 @@ public class UserInfoDAOImpl implements UserInfoDAO{
 	public int addUserEvaluationFromNames(UserEvaluationFormNames userEvaluationFormNames) {
 		return (Integer) sessionFactory.getCurrentSession().save(userEvaluationFormNames);
 	}
-
 }
